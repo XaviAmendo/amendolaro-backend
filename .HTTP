@@ -1,0 +1,17 @@
+//Products
+
+GET http://localhost:8080/api/products
+
+###
+GET http://localhost:8080/api/products/id
+
+###
+POST http://localhost:8080/api/products/
+
+###
+PUT http://localhost:8080/api/products/id
+
+###
+DELETE http://localhost:8080/api/products/id
+
+//Carts

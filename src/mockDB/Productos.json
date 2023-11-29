@@ -1,0 +1,92 @@
+[
+    {
+      "id": 1,
+      "title": "Ryzen 9 9700",
+      "description": "Microprocesador AMD Ryzen 9 9700",
+      "price": 750000,
+      "thumbnail": "thumbnail1.jpg",
+      "code": "P001",
+      "stock": 100
+    },
+    {
+      "id": 2,
+      "title": "Core i9 13300",
+      "description": "Microprocesador Intel i9 13300",
+      "price": 850000,
+      "thumbnail": "thumbnail2.jpg",
+      "code": "P002",
+      "stock": 50
+    },
+    {
+      "id": 3,
+      "title": "RTX 3080",
+      "description": "GPU Zotac Geforce rtx 3080",
+      "price": 800000,
+      "thumbnail": "thumbnail3.jpg",
+      "code": "P003",
+      "stock": 200
+    },
+    {
+      "id": 4,
+      "title": "RTX 3060 TI",
+      "description": "GPU MSI Gforce rtx 3060 TI",
+      "price": 700000,
+      "thumbnail": "thumbnail4.jpg",
+      "code": "P004",
+      "stock": 10
+    },
+    {
+      "id": 5,
+      "title": "Mother Asus Gaming AM4 WiFi",
+      "description": "Mother Asus B550 TUF wifi",
+      "price": 350000,
+      "thumbnail": "thumbnail5.jpg",
+      "code": "P005",
+      "stock": 11
+    },
+    {
+      "id": 6,
+      "title": "Mother Asus Gaming AM4",
+      "description": "Mother Asus B550 TUF",
+      "price": 300000,
+      "thumbnail": "thumbnail6.jpg",
+      "code": "P006",
+      "stock": 22
+    },
+    {
+      "id": 7,
+      "title": "Gabinete Gamer Xigmatek",
+      "description": "Gabinete Xigmatek Gaming",
+      "price": 75000,
+      "thumbnail": "thumbnail7.jpg",
+      "code": "P007",
+      "stock": 100
+    },
+    {
+      "id": 8,
+      "title": "Gabinete Gamer Corsair",
+      "description": "Gabinete Corsair Master",
+      "price": 150000,
+      "thumbnail": "thumbnail8.jpg",
+      "code": "P008",
+      "stock": 50
+    },
+    {
+      "id": 9,
+      "title": "Mouse Redragon 24000 DPI",
+      "description": "Mouse Redragon 24k DPI led",
+      "price": 350000,
+      "thumbnail": "thumbnail9.jpg",
+      "code": "P009",
+      "stock": 50
+    },
+    {
+      "id": 10,
+      "title": "Fuente de PC 850w",
+      "description": "Fuente 850w reales Zentey 80 Gold",
+      "price": 85000,
+      "thumbnail": "thumbnail10.jpg",
+      "code": "P010",
+      "stock": 20
+    }
+  ]

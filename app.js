@@ -56,5 +56,5 @@ app.get('/products/:id', (req, res) => {
 
 //
 app.listen(port, () => {
-    console.log(`Puerto de escucha ${port}`);
+  console.log(`Puerto de escucha ${port}`);
   });
