@@ -2,18 +2,18 @@ const { Router } =  require ('express');
 const ProductManager = require ('../managers/productsManager.js')
 const router = Router ();
 
-const productoManager = new ProductManager()
+const productoManager = new ProductManager ('./src/mockDB/Productos.json')
 
-router.get('/', async (req, res) => {
-    const products = await productoManager.getProducts
-    res.send ({
+router.get('/', async (req, res) => {//ok
+    const products = await productoManager.getProducts()
+    res.send ({ 
     status:'sucess',
     payload: products
 })
 })
 
-// enrutar desde aca 1.12.50 de video
-router.get('/:pid', async (req,res) => {
+
+router.get('/:pid', async (req,res) => {//ok
     const {pid} = req.params
     const product = await productoManager.getProduct(pid)
     if (!product) {
@@ -28,13 +28,13 @@ router.get('/:pid', async (req,res) => {
     })
 })
 
-
-router.post('/', async (req,res) => {
+//
+router.post('/', async (req,res) => {//ok
     const newProduct = req.body;
   
-    const resp = await products.addProduct(newProduct);
+    const resp = await productoManager.addProduct(newProduct)
   
-    if (typeof (resp) === "string") {
+    if (typeof (resp) == "string") {
       res.status(400).json({
         status: "fail",
         data: resp
@@ -46,13 +46,13 @@ router.post('/', async (req,res) => {
   });
 
 
-router.put('/:id', async (req,res) => {
-    const id = req.params.id * 1;
+router.put('/:pid', async (req,res) => {//ok
+    const {pid} = req.params//.id * 1;
     const updateToProduct = req.body;
   
-    const resp = await products.updateProduct(id, updateToProduct);
+    const resp = await productoManager.updateProduct(pid,updateToProduct)//(id, updateToProduct);
   
-    if (typeof (resp) === "string") {
+    if (typeof (resp) == "string") {
       res.status(400).json({
         status: "fail",
         data: resp
@@ -64,15 +64,15 @@ router.put('/:id', async (req,res) => {
   
   });
 
-router.delete('/:pid', (req,res)=>{
+router.delete('/:pid', async(req,res)=>{//ok
     const {pid} = req.params
-    res.send ('delete products '+ pid )
-});
+    //res.send ('delete products '+ pid )
+//});
 
-router.delete('/:id', async (req,res) => {
-    const id = req.params.id * 1
+//router.delete('/:id', async (req,res) => {
+    //const id = req.params.id * 1
   
-    const resp = await products.deleteProduct(id)
+    const resp = await productoManager.deleteProduct(pid)
   
     if (typeof (resp) === "string") {
       res.status(400).json({

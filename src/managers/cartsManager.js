@@ -17,7 +17,7 @@ class CartsManager {
         }
     }
 
-    getCartById = async (cid) => {
+    getCartById = async (cid) => {//ok
         const carts = await this.readFile()
         const cart = carts.find(cart => cart.id === cid)
         if (!cart) {
@@ -27,7 +27,7 @@ class CartsManager {
         return cart
     }
 
-    createCart = async () => {
+    createCart = async () => {//ok
         const carts = await this.readFile();
         let newCart;
 
@@ -42,7 +42,7 @@ class CartsManager {
         return results;
     };
 
-    addProductToCart = async (cid, pid) => {
+    addProductToCart = async (cid, pid) => {//ok
         const carts = await this.readFile();
         const cartIndex = carts.findIndex((cart) => cart.id === cid);
 

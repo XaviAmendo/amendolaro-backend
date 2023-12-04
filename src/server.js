@@ -4,7 +4,7 @@ const port = 8080;
 const productsRouter = require ('./routes/products.router.js')
 const cartRouter = require ('./routes/carts.router.js') 
 
-
+//INICIALIZAR CON NPM RUN DEV
 
 
 app.use(express.json());

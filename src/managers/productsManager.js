@@ -1,11 +1,13 @@
 
-const fs = require('fs')
+const fs = require('node:fs')
+
 
 const path = './src/mockDB/Productos.json'
 
 class ProductManager{
     constructor(){
         this.path = path
+        this.nextid = 1;//nuevo
     }
 
     readFile = async () => {
@@ -18,92 +20,101 @@ class ProductManager{
         }        
     }
 
+// get products
     getProducts = async () => {
         try {
             return await this.readFile()
+
         } catch (error) {
             return 'No hay productos'
         }
     }
 
-
+   
     getProduct = async (id) => {
         try {
             const products = await this.readFile()
             if(!products) return 'No hay productos'
-            return products.find(product => product.id === id)                     
+            return products.find(product => product.id == id) //le saque el === y funciona                     
         } catch (error) {
             return  new Error(error)
         }
     }
 
 
-addProduct = async ({title, description, code, price, stock, status = true, category, thumbnail = ""}) => {
-    if (!title || !description || !code || !price || !stock || !status || !category) {
-
-      if (!title) return "ERROR: debe completar el titulo"
-      if (!description) return "ERROR: debe completar la descripción"
-      if (!code) return "ERROR: debe completar el Código"
-      if (!price) return "ERROR: debe completar el Precio"
-      if (!stock) return "ERROR: debe completar el Stock"
-      if (!status) return "ERROR: debe completar el Estado"
-      if (!category) return "ERROR: debe completar la Categoria"
-
-      return 'ERROR: debe completar todos los campos';
-    }
-
-    const exists = this.products.some((p) => p.code === code);
-    if (exists) {
-      return 'ERROR: codigo repetido';
-    }
-
-    const newProduct = {
-      id: this.counterId,
-      title: title,
-      description: description,
-      code: code,
-      price: price,
-      status: status,
-      stock: stock,
-      category: category,
-      thumbnail: thumbnail,
-    };
-
-    this.counterId++;
-    this.products.push(newProduct);
-    const jsonProduct = JSON.stringify(this.products, null, 2);
-    await fs.promises.writeFile(this.path, jsonProduct);
-    return newProduct;
-  };
-
-
-
-     updateProduct = async(pid, updateToProduct) =>{
-        let products = await this.readFile()
-
-        const productIndex = products.findIndex(product => pid === product.id)
-        if (productIndex !== -1) { 
-            products[productIndex] = updateToProduct
-        }
-        await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2), 'utf-8')
-        return productIndex
-    }
-
-    async deleteProduct(id) {
-        const i = this.products.findIndex((elm) => elm.id === id);
-    
-    
-        if (i === -1) {
-          return 'Producto no encontrado';
-        } else {
-          const removedProduct = this.products[i]
-          const newProducts = this.products.filter((elm) => elm.id != id);
-          this.products = newProducts;
-          const jsonProduct = JSON.stringify(this.products, null, 2);
-          await fs.promises.writeFile(this.path, jsonProduct);
-          return removedProduct;
-        }
+addProduct = async (newItem) => {
+  try {   
+      let products = await this.readFile()
+      const productDb = products.find(product => product.code == newItem.code)
+      if (productDb) {
+          return `El producto ya existe`
       }
+
+      if (!newItem.title || !newItem.description || !newItem.code || !newItem.price || !newItem.status || !newItem.stock || !newItem.category) {
+          return `Faltan campos obligatorios`
+      }
+
+      if (products.length === 0 ) {
+          newItem.id = 1
+          products.push(newItem) 
+      } else { 
+          products =  [...products, {...newItem, id: products.length + 1 } ]
+      }
+
+      await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2), 'utf-8')
+
+      return 'Producto agregado'
+  } catch (error) {
+      return new Error(error)
+  }
+}
+
+
+
+ //   async updateProduct(id, updatedFields) {
+   //     let productEnArchivo = await fs.promises.readFile(this.path, 'utf-8');
+     //   let productos = JSON.parse(productEnArchivo);
+       // let index = productos.findIndex((p) => p.id == id);//===
+        //if (index !== -1) {
+         // productos[index] = { ...productos[index], ...updatedFields };
+          //const productEnString = JSON.stringify(productos, null, 2);
+          //await fs.promises.writeFile(this.path, productEnString, 'utf-8')//('products.json', productEnString);
+          //return true;
+        //}
+        //return false;
+      //}
+//ejemplo
+async updateProduct(id, updatedFields) {
+  try {   
+      let products = await this.readFile()
+      const index = products.findIndex((p) => p.id == id)
+      if (index !== -1) {
+          products[index] = { ...products[index], ...updatedFields }
+          const productsString = JSON.stringify(products, null, 2)
+          await fs.promises.writeFile(this.path, productsString, 'utf-8')
+          return true
+      }
+      return false
+  } catch (error) {
+      return new Error(error)
+  }
+}
+
+///
+
+
+async deleteProduct(id) {//ok
+    let productEnArchivo = await fs.promises.readFile(this.path, 'utf-8');
+    let productos = JSON.parse(productEnArchivo);
+    let index = productos.findIndex((p) => p.id == id);
+    if (index !== -1) {
+      productos.splice(index, 1);
+      const productEnString = JSON.stringify(productos, null, 2);
+      await fs.promises.writeFile(this.path, productEnString)//('products.json', productEnString);
+      return true;
+    }
+    return false;
+  }
 
 
 }

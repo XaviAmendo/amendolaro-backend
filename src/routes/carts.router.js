@@ -1,8 +1,8 @@
 const { Router } =  require ('express');
-const CartManager = require ('../managers/cartsManager')
+const CartManager = require ('../managers/cartsManager.js')
 const router = Router ();
 
-const carrito = new CartManager()
+const carrito = new CartManager('./src/mockDB/Carrito.json')
 
 router.post('/', async (req, res) => {
     try {

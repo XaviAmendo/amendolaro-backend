@@ -3,15 +3,23 @@
 GET http://localhost:8080/api/products
 
 ###
-GET http://localhost:8080/api/products/id
+GET http://localhost:8080/api/products/3
 
 ###
 POST http://localhost:8080/api/products/
 
 ###
-PUT http://localhost:8080/api/products/id
+PUT http://localhost:8080/api/products/11
 
 ###
-DELETE http://localhost:8080/api/products/id
+DELETE http://localhost:8080/api/products/11
 
 //Carts
+###
+GET http://localhost:8080/api/carts/3
+
+###
+POST http://localhost:8080/api/carts/
+
+###
+POST http://localhost:8080/api/carts/2023120413/product/7
